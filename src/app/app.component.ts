@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'todoapp';
+  title = 'todo-app';
   welcome = 'Bienvenid@s!';
   tasks = [
     'Instalar Angular CLI',
