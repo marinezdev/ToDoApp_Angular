@@ -9,3 +9,10 @@
 <h2>{{ 'Hola Mundo!'.repeat(4) }}</h2>
 <p> La suma de 3 + 5 es:   {{ 3+5 }}</p>
 <p> Hola, soy {{ name }} y mi edad es: {{ age }} años</p>
+<hr/>
+<!-- Property binding with angular -->
+<img [src]="person.avatar" alt="" />
+<input type="text" [value]="person.age" />
+<button [disabled]="disabled">Click me</button>
+<p>person: {{ person.name }}
+</p>
