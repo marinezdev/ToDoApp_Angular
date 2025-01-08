@@ -9,7 +9,7 @@
   <br/>
   <h2>{{ 'Hola Mundo!'.repeat(4) }}</h2>
   <p> La suma de 3 + 5 es:   {{ 3+5 }}</p>
-  <p> Hola, soy {{ name }} y mi edad es: {{ age }} años</p>
+  <p> Hola, soy {{ name() }} y mi edad es: {{ age }} años</p>
   <hr/>
   <!-- Property binding with angular -->
   <img [src]="person.avatar" alt="" />
@@ -29,10 +29,6 @@
   <input type="text" [value]="person.name" (keydown)="keydownHandler($event)" />
   <p>(keydown on shorthot)</p>
   <input type="text" [value]="person.name" (keydown.shift.t)="clickHandler()" />
-
-
-
-
   <!-- Events Examples
     * click: Se activa cuando se hace clic en un elemento. Por ejemplo:<button (click)="onSave()">Guardar</button>
     * dblclick: Se activa cuando se hace doble clic en un elemento. Por ejemplo:<div (dblclick)="onDoubleClick()">Haz doble clic aquí</div>
@@ -46,4 +42,12 @@
     * focus: Se activa cuando un elemento obtiene el foco.
     * blur: Similar a focus, pero se activa cuando un elemento pierde el foco.
   -->
+
+  <hr/><hr/>
+  <h1>Signals</h1>
+  <input type="text" [value]="name()" (change)="changeHandler($event)" />
+  <p>name changed to: {{ name() }}</p>
+
+
+
 </div>
