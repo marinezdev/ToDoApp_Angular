@@ -24,4 +24,20 @@ export class LabsComponent {
     age:42,
     avatar:'https://w3schools.com/howto/img_avatar.png',
   };
+
+  clickHandler() 
+  {
+    alert('hola.....');
+  }
+
+  changeHandler(event: Event) 
+  {
+    console.log(event);
+  }
+
+  keydownHandler(event: KeyboardEvent)
+  {
+    const input = event.target as HTMLInputElement;
+    console.log(input.value);
+  }
 }

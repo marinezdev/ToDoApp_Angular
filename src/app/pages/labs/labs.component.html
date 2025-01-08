@@ -1,18 +1,49 @@
-<h1>Este es mi primer proyecto en angular</h1>
-<h2>{{ welcome }}</h2>
-<ul>
-  <li *ngFor='let task of tasks'>
-    {{ task }}
-  </li>
-</ul>
-<br/>
-<h2>{{ 'Hola Mundo!'.repeat(4) }}</h2>
-<p> La suma de 3 + 5 es:   {{ 3+5 }}</p>
-<p> Hola, soy {{ name }} y mi edad es: {{ age }} años</p>
-<hr/>
-<!-- Property binding with angular -->
-<img [src]="person.avatar" alt="" />
-<input type="text" [value]="person.age" />
-<button [disabled]="disabled">Click me</button>
-<p>person: {{ person.name }}
-</p>
+<div class="container">
+  <h1>Este es mi primer proyecto en angular</h1>
+  <h2>{{ welcome }}</h2>
+  <ul>
+    <li *ngFor='let task of tasks'>
+      {{ task }}
+    </li>
+  </ul>
+  <br/>
+  <h2>{{ 'Hola Mundo!'.repeat(4) }}</h2>
+  <p> La suma de 3 + 5 es:   {{ 3+5 }}</p>
+  <p> Hola, soy {{ name }} y mi edad es: {{ age }} años</p>
+  <hr/>
+  <!-- Property binding with angular -->
+  <img [src]="person.avatar" alt="" />
+  <input type="text" [value]="person.age" />
+  <button [disabled]="disabled">Click me</button>
+  <p>person: {{ person.name }}
+  </p>
+  <hr/>
+  <!-- Events handler -->
+  <button (click)="clickHandler()">click me</button><br/>
+  <button (dblclick)="clickHandler()">double click</button><br/>
+  <p>(change)</p>
+  <input type="number" [value]="person.age" (change)="changeHandler($event)" />
+  <p>(change on input text)</p>
+  <input type="text" [value]="person.age" (change)="changeHandler($event)" />  
+  <p>(keydown)</p>
+  <input type="text" [value]="person.name" (keydown)="keydownHandler($event)" />
+  <p>(keydown on shorthot)</p>
+  <input type="text" [value]="person.name" (keydown.shift.t)="clickHandler()" />
+
+
+
+
+  <!-- Events Examples
+    * click: Se activa cuando se hace clic en un elemento. Por ejemplo:<button (click)="onSave()">Guardar</button>
+    * dblclick: Se activa cuando se hace doble clic en un elemento. Por ejemplo:<div (dblclick)="onDoubleClick()">Haz doble clic aquí</div>
+    * input: Se activa cuando se introduce texto en un campo de entrada (como un input o textarea). Útil para detectar cambios en el contenido.<input (input)="onInput($event.target.value)" />
+    * change: Se activa cuando cambia el valor de un elemento de entrada (por ejemplo, un select).<select (change)="onSelectionChange($event.target.value)">   <option value="option1">Opción 1</option>   <option value="option2">Opción 2</option> </select>
+    * keydown: Se activa cuando se presiona una tecla. Puedes especificar la tecla o el código que deseas enlazar. Por ejemplo:<input (keydown.enter)="onKeydown($event)" />
+    * keyup: Similar a keydown, pero se activa cuando se suelta una tecla.
+    * mouseover: Se activa cuando el puntero del ratón entra en un elemento.
+    * mouseout: Similar a mouseover, pero se activa cuando el puntero del ratón sale de un elemento.
+    * mouseleave: Se activa cuando el puntero del ratón sale de un elemento. Similar a mouseout, pero no se propaga a los elementos secundarios. <div (mouseleave)="onMouseLeave()">El ratón se fue</div>
+    * focus: Se activa cuando un elemento obtiene el foco.
+    * blur: Similar a focus, pero se activa cuando un elemento pierde el foco.
+  -->
+</div>
