@@ -68,8 +68,27 @@ export class HomeComponent {
     // });
   }
 
+  updateTask(index: number) 
+  {
+    // actualizacion del array sin mutarlo
+    this.tasks.update((tasks) => {
+        return tasks.map((task, position) => {
+          if (position === index)
+          {
+            return {
+              ...task,
+              completed: !task.completed,
+            }
+          };
+          return task;
+        })
+      }
+    );
+  }
+
   completedTask(index: number) 
   {
+    // es la misma funcion que updateTask
     this.tasks.update((value) =>
       value.map((task, position) => {
         if (position === index)
