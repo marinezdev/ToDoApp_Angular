@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -7,6 +7,12 @@ import { CommonModule } from '@angular/common';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
 
+export class HomeComponent {
+  tasks = signal([
+    'Instalar Angular CLI',
+    'Crear proyecto',
+    'Crear componentes',
+    'Crear servicio'
+  ]);
 }
