@@ -12,23 +12,23 @@
   <p> Hola, soy {{ name() }} y mi edad es: {{ age }} años</p>
   <hr/>
   <!-- Property binding with angular -->
-  <img [src]="person.avatar" alt="" />
-  <input type="text" [value]="person.age" />
+  <img [src]="person().avatar" alt="" />
+  <input type="text" [value]="person().age" />
   <button [disabled]="disabled">Click me</button>
-  <p>person: {{ person.name }}
+  <p>object person: {{ person().name }}
   </p>
   <hr/>
   <!-- Events handler -->
   <button (click)="clickHandler()">click me</button><br/>
   <button (dblclick)="clickHandler()">double click</button><br/>
   <p>(change)</p>
-  <input type="number" [value]="person.age" (change)="changeHandler($event)" />
+  <input type="number" [value]="person().age" (change)="changeHandler($event)" />
   <p>(change on input text)</p>
-  <input type="text" [value]="person.age" (change)="changeHandler($event)" />  
+  <input type="text" [value]="person().age" (change)="changeHandler($event)" />  
   <p>(keydown)</p>
-  <input type="text" [value]="person.name" (keydown)="keydownHandler($event)" />
+  <input type="text" [value]="person().name" (keydown)="keydownHandler($event)" />
   <p>(keydown on shorthot)</p>
-  <input type="text" [value]="person.name" (keydown.shift.t)="clickHandler()" />
+  <input type="text" [value]="person().name" (keydown.shift.t)="clickHandler()" />
   <!-- Events Examples
     * click: Se activa cuando se hace clic en un elemento. Por ejemplo:<button (click)="onSave()">Guardar</button>
     * dblclick: Se activa cuando se hace doble clic en un elemento. Por ejemplo:<div (dblclick)="onDoubleClick()">Haz doble clic aquí</div>
@@ -56,5 +56,32 @@
       {{ i }} {{ task }}
     </li>
   </ul>
+  <hr/><hr/>
+  <h2>Debug Array</h2>
+  <!-- Debug the state of the array -->
+  <pre>
+    <code>
+      {{ tasks() | json }}
+    </code>
+  </pre>
+  <hr/><hr/>
+  <div *ngIf="1 !== 1">
+    my contend no es mostrado
+  </div>
+  <div *ngIf="1 === 1">
+    my contend es mostrado
+  </div>
+  <hr/>
+  <div *ngIf="name() === 'Rubén' ">
+    {{ name() }}
+  </div>
+  <hr/>
 
+  <input type="number" [value]="person().age" (change)="changeAgeHandler($event)" />
+  <div *ngIf="person().name === 'Marinez' && person().age > 40; else elseBlock ">
+    {{ person() | json }}
+  </div>
+  <ng-template #elseBlock>
+    *** La persona no se encuentra dada de alta
+  </ng-template>
 </div>
