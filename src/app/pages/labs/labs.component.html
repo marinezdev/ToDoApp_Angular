@@ -84,4 +84,13 @@
   <ng-template #elseBlock>
     *** La persona no se encuentra dada de alta
   </ng-template>
+
+  <hr/>
+  <h2>ngSwitch</h2>
+  <input type="text" [value]="person().name" (keydown.shift.c)="changeName($event)" />
+  <div [ngSwitch]="person().name">
+    <p *ngSwitchCase="'Rubén'">yo soy Rubén</p>
+    <p *ngSwitchCase="'Marinez'">yo soy Rubén Marinez</p>
+    <p *ngSwitchDefault>Persona no identificada</p>
+  </div>
 </div>
