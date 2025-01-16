@@ -98,4 +98,16 @@
   <h2>Manejo de formularios</h2>
   <input type="color" [formControl]="colorCtrl">
   <p>Color: {{ colorCtrl.value }}</p>
+
+  <hr/><hr/>
+  <h2>Aplicar estilos al modo angular</h2>
+  <svg>
+    <g>
+      <rect x="0" y="0" height="100" width="100" [attr.fill]="colorCtrl.value"/>
+    </g>
+  </svg>
+  <hr/>
+  <input type="number" [formControl]="widthCtrl" />
+  <span class="box" [style.width.px]="widthCtrl.value" ></span>
+
 </div>
