@@ -1,13 +1,24 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormControl, ReactiveFormsModule, ValueChangeEvent } from '@angular/forms';
+
 
 @Component({
   selector: 'app-labs',
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './labs.component.html',
-  styleUrl: './labs.component.css'
+  styleUrl: './labs.component.css',
 })
 export class LabsComponent {
+
+  colorCtrl = new FormControl();
+  constructor() 
+  {
+    this.colorCtrl.valueChanges.subscribe(value => {
+      console.log(value);
+    });
+  }
+
   welcome = 'Bienvenid@s!';
   tasks = signal([
     'Instalar Angular CLI',
@@ -25,6 +36,8 @@ export class LabsComponent {
     age:42,
     avatar:'https://w3schools.com/howto/img_avatar.png',
   });
+
+  
 
   clickHandler() 
   {
@@ -73,4 +86,7 @@ export class LabsComponent {
 
     console.log(event);
   }
+
+  
+
 }

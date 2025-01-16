@@ -93,4 +93,9 @@
     <p *ngSwitchCase="'Marinez'">yo soy Rubén Marinez</p>
     <p *ngSwitchDefault>Persona no identificada</p>
   </div>
+
+  <hr/><hr/>
+  <h2>Manejo de formularios</h2>
+  <input type="color" [formControl]="colorCtrl">
+  <p>Color: {{ colorCtrl.value }}</p>
 </div>
