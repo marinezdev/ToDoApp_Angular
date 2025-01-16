@@ -1,17 +1,47 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { Task } from './../../models/task.model';
 import { compileClassDebugInfo } from '@angular/compiler';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 
 export class HomeComponent {
+
+  newTaskCtrl = new FormControl('', {
+    nonNullable: true,
+    validators: [
+      Validators.required,
+      Validators.pattern('^\\S.*$'),
+      Validators.minLength(3),
+      Validators.maxLength(50),
+    ]
+  });
+
+  newTaskHandler()
+  {
+    // if (this.newTaskCtrl.valid)
+    // {
+    //   const value = this.newTaskCtrl.value;
+    //   this.addTask(value);
+    //   this.newTaskCtrl.setValue('');
+    // }
+
+    if (this.newTaskCtrl.invalid || this.newTaskCtrl.value.trim() === '')
+    {
+      return;
+    }
+    
+    this.addTask(this.newTaskCtrl.value.trim());
+    this.newTaskCtrl.setValue('');
+  }
+
   tasks = signal<Task[]>([
     {
       id: Date.now(),
@@ -35,13 +65,15 @@ export class HomeComponent {
     },
   ]);
 
-  newTaskHandler(event: Event) 
-  {
-    const input = event.target as HTMLInputElement;
-    const newTaskValue = input.value;
-    this.addTask(newTaskValue);
-    input.value='';
-  }
+  // newTaskHandler(event: Event) 
+  // {
+  //   const input = event.target as HTMLInputElement;
+  //   const newTaskValue = input.value;
+  //   this.addTask(newTaskValue);
+  //   input.value='';
+  // }
+
+  
 
   addTask(title: string)
   {
