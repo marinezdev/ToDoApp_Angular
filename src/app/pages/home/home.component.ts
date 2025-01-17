@@ -42,6 +42,52 @@ export class HomeComponent {
     this.newTaskCtrl.setValue('');
   }
 
+  updateTaskEditingMode(index: number)
+  {
+    // validamos si la tarea se encuentra completa, no permitir la edicion
+    if (this.tasks()[index].completed)
+    {
+      return;
+    }
+
+    // actualizacion del array sin mutarlo
+    this.tasks.update((tasks) => {
+      return tasks.map((task, position) => {
+        if (position === index && !task.completed)
+        {
+          return {
+            ...task,
+            editing: true,
+          }
+        };
+        return {
+          ...task,
+          editing: false,
+        };
+      })
+    });
+  }
+
+  updateTaskTitle(index: number, event: Event)
+  {
+    const input = event.target as HTMLInputElement;
+    
+    // actualizacion del array sin mutarlo
+    this.tasks.update((tasks) => {
+      return tasks.map((task, position) => {
+        if (position === index && !task.completed)
+        {
+          return {
+            ...task,
+            title: input.value,
+            editing: false,
+          }
+        };
+        return task;
+      })
+    });
+  }
+
   tasks = signal<Task[]>([
     {
       id: Date.now(),
