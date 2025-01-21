@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -14,6 +14,29 @@ import { compileClassDebugInfo } from '@angular/compiler';
 
 export class HomeComponent {
 
+  tasks = signal<Task[]>([
+    {
+      id: Date.now(),
+      title: 'Instalar Angular CLI',
+      completed: true,
+    },
+    {
+      id: Date.now(),
+      title: 'Crear proyecto',
+      completed: false,
+    },
+    {
+      id: Date.now(),
+      title: 'Crear componentes',
+      completed: false,
+    },
+    {
+      id: Date.now(),
+      title: 'Crear servicio',
+      completed: false,
+    },
+  ]);
+
   newTaskCtrl = new FormControl('', {
     nonNullable: true,
     validators: [
@@ -22,6 +45,23 @@ export class HomeComponent {
       Validators.minLength(3),
       Validators.maxLength(50),
     ]
+  });
+
+  filter = signal<'all' | 'pending' | 'completed'>('all');
+  tasksByFileter = computed( () => {
+    const filter = this.filter();
+    const tasks = this.tasks();
+    if (filter === 'pending')
+    {
+      return tasks.filter(task => !task.completed);
+    }
+
+    if (filter === 'completed')
+    {
+        return tasks.filter(task => task.completed);
+    }
+
+    return tasks;
   });
 
   newTaskHandler()
@@ -88,29 +128,6 @@ export class HomeComponent {
     });
   }
 
-  tasks = signal<Task[]>([
-    {
-      id: Date.now(),
-      title: 'Instalar Angular CLI',
-      completed: true,
-    },
-    {
-      id: Date.now(),
-      title: 'Crear proyecto',
-      completed: false,
-    },
-    {
-      id: Date.now(),
-      title: 'Crear componentes',
-      completed: false,
-    },
-    {
-      id: Date.now(),
-      title: 'Crear servicio',
-      completed: false,
-    },
-  ]);
-
   // newTaskHandler(event: Event) 
   // {
   //   const input = event.target as HTMLInputElement;
@@ -118,8 +135,6 @@ export class HomeComponent {
   //   this.addTask(newTaskValue);
   //   input.value='';
   // }
-
-  
 
   addTask(title: string)
   {
@@ -177,6 +192,11 @@ export class HomeComponent {
         return task;
       })
     );
+  }
+
+  changeFilter(filter: 'all' | 'pending' | 'completed') 
+  {
+    this.filter.set(filter);
   }
 
 }

@@ -21,7 +21,7 @@
               (dblclick)="updateTaskEditingMode(i)" 
               [class.editing]="task.editing"
               [class.completed]="task.completed" 
-              *ngFor="let task of tasks(); index as i"
+              *ngFor="let task of tasksByFileter(); index as i"
               >
             <div class="view">
               <input class="toggle" type="checkbox" [checked]="task.completed" (click)="updateTask(i)" />
@@ -63,23 +63,23 @@
       <footer class="footer">
         <!-- This should be `0 items left` by default -->
         <span class="todo-count">
-          <strong> {{ tasks().length }} </strong> 
+          <strong> {{ tasksByFileter().length }} </strong> 
           <!--
           item<ng-container *ngIf=" tasks().length !== 1 ">s</ng-container>
           -->
-          <span *ngIf=" tasks().length === 1; else elseBlock">item</span>
+          <span *ngIf=" tasksByFileter().length === 1; else elseBlock">item</span>
           <ng-template #elseBlock>items</ng-template>
         </span>
         <!-- Remove this if you don't implement routing -->
         <ul class="filters">
           <li>
-            <a routerLink="/" class="selected">All</a>
+            <a (click)="changeFilter('all')" class="selected">All</a>
           </li>
           <li>
-            <a routerLink="/pending">Pending</a>
+            <a (click)="changeFilter('pending')">Pending</a>
           </li>
           <li>
-            <a routerLink="/completed">Completed</a>
+            <a (click)="changeFilter('completed')">Completed</a>
           </li>
         </ul>
         <!-- Hidden if no completed items are left ↓ -->
