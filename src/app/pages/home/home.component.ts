@@ -1,4 +1,4 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, Injector, signal, effect, inject, computed, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -14,27 +14,52 @@ import { compileClassDebugInfo } from '@angular/compiler';
 
 export class HomeComponent {
 
+  injector = inject(Injector);
+
+  constructor() 
+  {
+    
+  }
+
+  ngOnInit() {
+    const storage = localStorage.getItem('tasks');
+    if (storage)
+    {
+      const tasks = JSON.parse(storage);
+      this.tasks.set(tasks);
+    }
+    this.trackTasks();
+  }
+
+  trackTasks() {
+    effect( () => {
+      const tasks = this.tasks();
+      console.log(tasks);
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }, { injector: this.injector });
+  }
+
   tasks = signal<Task[]>([
-    {
-      id: Date.now(),
-      title: 'Instalar Angular CLI',
-      completed: true,
-    },
-    {
-      id: Date.now(),
-      title: 'Crear proyecto',
-      completed: false,
-    },
-    {
-      id: Date.now(),
-      title: 'Crear componentes',
-      completed: false,
-    },
-    {
-      id: Date.now(),
-      title: 'Crear servicio',
-      completed: false,
-    },
+    // {
+    //   id: Date.now(),
+    //   title: 'Instalar Angular CLI',
+    //   completed: true,
+    // },
+    // {
+    //   id: Date.now(),
+    //   title: 'Crear proyecto',
+    //   completed: false,
+    // },
+    // {
+    //   id: Date.now(),
+    //   title: 'Crear componentes',
+    //   completed: false,
+    // },
+    // {
+    //   id: Date.now(),
+    //   title: 'Crear servicio',
+    //   completed: false,
+    // },
   ]);
 
   newTaskCtrl = new FormControl('', {
