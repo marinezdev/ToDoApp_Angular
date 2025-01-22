@@ -71,12 +71,15 @@
   <div *ngIf="1 === 1">
     my contend es mostrado
   </div>
-  <hr/>
+  <hr/>  
   <div *ngIf="name() === 'Rubén' ">
-    {{ name() }}
+    Mi nombre es: {{ name() }}
   </div>
+  @if (name() === 'Rubén') 
+  {
+    Mi nombre es: {{ name() }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Nueva version Angular</b>
+  }
   <hr/>
-
   <input type="number" [value]="person().age" (change)="changeAgeHandler($event)" />
   <div *ngIf="person().name === 'Marinez' && person().age > 40; else elseBlock ">
     {{ person() | json }}
@@ -84,6 +87,16 @@
   <ng-template #elseBlock>
     *** La persona no se encuentra dada de alta
   </ng-template>
+  <h2> If and else with new sintaxs </h2>
+  @if (person().name === 'Marinez' && person().age > 40) {
+    <div>
+      {{ person() | json }}
+    </div>
+  } @else {
+    <div>
+      *** La persona no se encuentra dada de alta
+    </div>
+  }
 
   <hr/>
   <h2>ngSwitch</h2>
@@ -124,5 +137,5 @@
   <h2>Computed State (Estados compuestos con computed)</h2>
   <p>Ver el ejercicio en la aplicacion ToDoApp / tasksByFileter</p>
   <hr/><hr/>
-  <h2>Persistencia con local storege [ Effect ]   /    Uso de effect para localstorege</h2>
+  <h2>Persistencia con local storege [ Effect ]   /    Uso de effect para local</h2>
 </div>
