@@ -138,4 +138,46 @@
   <p>Ver el ejercicio en la aplicacion ToDoApp / tasksByFileter</p>
   <hr/><hr/>
   <h2>Persistencia con local storege [ Effect ]   /    Uso de effect para local</h2>
+  <hr/><hr/>
+  <h1>New Sintaxs of Angular V17 or above</h1>
+  <hr>
+  <h2>New For sintaxs</h2>
+  <p>Total de elementos: {{ tasks().length }}</p>
+  <ul>
+    <li *ngFor='let task of tasks(); index as i'>
+      {{ i }} {{ task }}
+    </li>
+  </ul>
+  <ul>
+    @for (task of tasks(); track task; let i = $index) 
+    {
+      <li>
+        {{ i }} {{ task }}]
+      </li>
+    } @empty { 
+      <li><strong>La lista se encuentra vacia</strong></li>
+    }
+  </ul>
+  <hr>
+  <h2>New Switch Sintaxs</h2>
+  <input type="text" [value]="person().name" (keydown.shift.c)="changeName($event)" />
+  <div [ngSwitch]="person().name">
+    <p *ngSwitchCase="'Rubén'">yo soy Rubén</p>
+    <p *ngSwitchCase="'Marinez'">yo soy Rubén Marinez</p>
+    <p *ngSwitchDefault>Persona no identificada</p>
+  </div>
+  <div>
+    @switch (person().name) 
+    {
+      @case ('Rubén') {
+        <p><b>yo soy Rubén</b></p>
+      }
+      @case ('Marinez') {
+        <p><b>yo soy Marinez</b></p>
+      }
+      @default {
+        <p><b>Persona no identificada</b></p>
+      }
+    }
+  </div>
 </div>
